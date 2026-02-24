@@ -3,209 +3,300 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TONTINE+ · Fintech Agricole · Diourbel</title>
-<meta name="description" content="La tontine de village devient une banque numérique. Financement intrants agricoles via scoring IA et Wave. Diourbel, Sénégal."/>
+<title>TONTINE+ · Achetez vos intrants aujourd'hui, payez après la récolte</title>
+<meta name="description" content="Achetez semences et engrais aujourd'hui, payez après la récolte. Scoring IA sur tontines, paiement Wave. Diourbel, Sénégal."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0C1F0C;
-  --paper:#F7F4EE;
-  --green:#1A5C2A;
-  --green2:#2E8B47;
-  --lime:#A8D558;
-  --gold:#D4A017;
-  --rust:#C94F2C;
-  --sand:#E8DFC8;
-  --mist:#EFF5EE;
+  --ink:#0C1F0C; --paper:#F7F4EE; --green:#1A5C2A; --green2:#2E8B47;
+  --lime:#A8D558; --gold:#D4A017; --rust:#C94F2C; --sand:#E8DFC8;
+  --mist:#EFF5EE; --blue:#1565C0;
   --serif:'Playfair Display',Georgia,serif;
   --sans:'DM Sans',system-ui,sans-serif;
   --mono:'DM Mono',monospace;
 }
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");background-size:128px;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px;}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(247,244,238,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,92,42,.1);}
-.logo{font-family:var(--serif);font-size:1.25rem;font-weight:900;color:var(--green);letter-spacing:-.02em;text-decoration:none;}
-.logo sup{font-size:.55rem;vertical-align:super;color:var(--gold);letter-spacing:.1em;}
-.nav-r{display:flex;gap:2rem;align-items:center;}
-.nav-r a{font-size:.85rem;font-weight:500;color:var(--ink);text-decoration:none;opacity:.6;transition:opacity .2s;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(247,244,238,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(26,92,42,.08);}
+.logo{font-family:var(--serif);font-size:1.2rem;font-weight:900;color:var(--green);letter-spacing:-.02em;text-decoration:none;}
+.logo sup{font-size:.5rem;vertical-align:super;color:var(--gold);letter-spacing:.1em;}
+.nav-r{display:flex;gap:1.75rem;align-items:center;}
+.nav-r a{font-size:.83rem;font-weight:500;color:var(--ink);text-decoration:none;opacity:.55;transition:opacity .2s;}
 .nav-r a:hover{opacity:1;}
-.nav-cta{background:var(--green);color:#fff!important;opacity:1!important;padding:.45rem 1.1rem;border-radius:6px;font-size:.82rem!important;font-weight:600!important;transition:background .2s!important;}
+.nav-cta{background:var(--green)!important;color:#fff!important;opacity:1!important;padding:.42rem 1.05rem;border-radius:6px;font-weight:600!important;}
 .nav-cta:hover{background:var(--green2)!important;}
 
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:5rem;overflow:hidden;position:relative;}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3rem 5rem 4rem;position:relative;z-index:2;}
-.pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--sand);border:1px solid rgba(26,92,42,.2);padding:.35rem .9rem;border-radius:99px;font-size:.78rem;font-weight:600;color:var(--green);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2rem;width:fit-content;}
-.pill::before{content:'';width:7px;height:7px;background:var(--lime);border-radius:50%;animation:blink 2s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-h1{font-family:var(--serif);font-size:clamp(3rem,5vw,4.5rem);line-height:1.05;letter-spacing:-.03em;color:var(--green);margin-bottom:1.5rem;}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:4.5rem;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 4rem;}
+.pill{display:inline-flex;align-items:center;gap:.45rem;background:var(--sand);border:1px solid rgba(26,92,42,.2);padding:.3rem .85rem;border-radius:99px;font-size:.75rem;font-weight:700;color:var(--green);letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.75rem;width:fit-content;}
+.pill::before{content:'';width:6px;height:6px;background:var(--lime);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+h1{font-family:var(--serif);font-size:clamp(2.6rem,4.5vw,4.2rem);line-height:1.06;letter-spacing:-.03em;color:var(--green);margin-bottom:1.4rem;}
 h1 em{font-style:italic;color:var(--gold);}
-.hero-sub{font-size:1.05rem;line-height:1.65;color:rgba(12,31,12,.6);max-width:440px;margin-bottom:2.5rem;}
-.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none;}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.hero-sub{font-size:1rem;line-height:1.7;color:rgba(12,31,12,.58);max-width:430px;margin-bottom:2.25rem;}
+.hero-btns{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1rem;}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.68rem 1.4rem;border-radius:8px;font-weight:600;font-size:.88rem;text-decoration:none;transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.14);}
 .btn-solid{background:var(--green);color:#fff;}
 .btn-ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);}
-.hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--sand);}
-.stat-val{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--green);line-height:1;}
-.stat-lbl{font-size:.75rem;color:rgba(12,31,12,.5);margin-top:.25rem;font-weight:500;}
+.btn-gold{background:var(--gold);color:#fff;}
+.hero-note{font-size:.78rem;color:rgba(12,31,12,.38);margin-top:.5rem;}
 
+/* HERO STATS — 4 chiffres pilote */
+.hero-stats{display:flex;gap:2rem;margin-top:2.75rem;padding-top:2rem;border-top:1px solid var(--sand);flex-wrap:wrap;}
+.stat-val{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--green);line-height:1;}
+.stat-lbl{font-size:.72rem;color:rgba(12,31,12,.45);margin-top:.2rem;font-weight:500;letter-spacing:.02em;}
+
+/* HERO RIGHT — mockup */
 .hero-right{background:var(--green);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.hero-right::before{content:'';position:absolute;width:120%;height:120%;background:radial-gradient(ellipse at 30% 40%,rgba(168,213,88,.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 70%,rgba(212,160,23,.1) 0%,transparent 50%);}
-.mockup{position:relative;z-index:2;width:320px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:1.5rem;backdrop-filter:blur(8px);box-shadow:0 32px 80px rgba(0,0,0,.4);}
-.mockup-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.1);}
-.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.mockup-header div p:first-child{color:#fff;font-weight:600;font-size:.9rem;}
-.mockup-header div p:last-child{color:rgba(255,255,255,.5);font-size:.75rem;}
-.score-ring{display:flex;flex-direction:column;align-items:center;margin:1rem 0 1.5rem;}
-.ring{width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.08) 72%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(168,213,88,.2),0 0 40px rgba(168,213,88,.15);}
-.ring-inner{width:80px;height:80px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.ring-val{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--lime);line-height:1;}
-.ring-max{font-size:.65rem;color:rgba(255,255,255,.4);}
-.ring-label{margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase;}
-.mockup-rows{display:flex;flex-direction:column;gap:.6rem;}
-.mock-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border-radius:8px;padding:.6rem .8rem;}
-.mock-row-l{display:flex;align-items:center;gap:.6rem;}
-.mock-icon{font-size:.9rem;}
-.mock-row-l span{font-size:.8rem;color:rgba(255,255,255,.7);}
-.mock-chip{font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:99px;}
-.chip-g{background:rgba(168,213,88,.2);color:var(--lime);}
-.chip-y{background:rgba(212,160,23,.2);color:var(--gold);}
-.chip-r{background:rgba(201,79,44,.2);color:#FF7F6A;}
-.wave-btn{margin-top:1rem;width:100%;background:var(--lime);color:var(--green);border:none;border-radius:10px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:default;letter-spacing:.02em;}
+.hero-right::before{content:'';position:absolute;width:140%;height:140%;
+  background:radial-gradient(ellipse at 25% 35%,rgba(168,213,88,.14) 0%,transparent 55%),
+             radial-gradient(ellipse at 75% 70%,rgba(212,160,23,.09) 0%,transparent 50%);}
+.mockup{position:relative;z-index:2;width:310px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:1.4rem;backdrop-filter:blur(8px);box-shadow:0 32px 80px rgba(0,0,0,.45);}
+.mh{display:flex;align-items:center;gap:.7rem;margin-bottom:1.35rem;padding-bottom:.9rem;border-bottom:1px solid rgba(255,255,255,.09);}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.mh div p:first-child{color:#fff;font-weight:600;font-size:.87rem;}
+.mh div p:last-child{color:rgba(255,255,255,.45);font-size:.72rem;}
+.score-ring{display:flex;flex-direction:column;align-items:center;margin:.75rem 0 1.35rem;}
+.ring{width:105px;height:105px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.07) 72%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(168,213,88,.18),0 0 36px rgba(168,213,88,.14);}
+.ring-inner{width:76px;height:76px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-val{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--lime);line-height:1;}
+.ring-max{font-size:.6rem;color:rgba(255,255,255,.35);}
+.ring-label{margin-top:.5rem;font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;}
+.mock-rows{display:flex;flex-direction:column;gap:.55rem;}
+.mr{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border-radius:7px;padding:.55rem .75rem;}
+.mr-l{display:flex;align-items:center;gap:.55rem;}
+.mi{font-size:.85rem;}
+.mr-l span{font-size:.78rem;color:rgba(255,255,255,.68);}
+.mc{font-size:.68rem;font-weight:700;padding:.18rem .5rem;border-radius:99px;}
+.cg{background:rgba(168,213,88,.2);color:var(--lime);}
+.cy{background:rgba(212,160,23,.2);color:var(--gold);}
+.cr{background:rgba(201,79,44,.2);color:#FF7F6A;}
+.wave-btn{margin-top:.9rem;width:100%;background:var(--lime);color:var(--green);border:none;border-radius:9px;padding:.65rem;font-weight:700;font-size:.83rem;cursor:default;}
 
-section{padding:6rem 4rem;}
+/* BANDEAU "ACHETEZ MAINTENANT, PAYEZ À LA RÉCOLTE" — inspiré Tarfin */
+.harvest-banner{
+  background:var(--gold);color:#fff;
+  text-align:center;padding:1rem 2rem;
+  font-size:1.05rem;font-weight:700;letter-spacing:.02em;
+}
+.harvest-banner span{opacity:.8;font-weight:400;font-size:.9rem;margin-left:.75rem;}
+
+/* CHIFFRES TRACTION */
+.numbers-section{background:var(--green);}
+.numbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:0;}
+.num-card{padding:3rem 2rem;text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+.num-card:last-child{border-right:none;}
+.num-icon{font-size:2rem;margin-bottom:.75rem;}
+.num-val{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--lime);line-height:1;}
+.num-lbl{font-size:.82rem;color:rgba(255,255,255,.55);margin-top:.35rem;font-weight:500;}
+.num-sub{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:.15rem;}
+
+/* COMMENT ÇA MARCHE — 3 étapes Tarfin style */
+section{padding:5.5rem 4rem;}
 .container{max-width:1100px;margin:0 auto;}
-.tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
-h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;letter-spacing:-.02em;color:var(--green);line-height:1.15;margin-bottom:1rem;}
-.section-sub{color:rgba(12,31,12,.55);font-size:1rem;line-height:1.7;max-width:520px;}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;}
+h2{font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.6rem);font-weight:700;letter-spacing:-.025em;color:var(--green);line-height:1.15;margin-bottom:.9rem;}
+.section-sub{color:rgba(12,31,12,.52);font-size:.97rem;line-height:1.72;max-width:520px;}
 
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
+.step-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--sand);position:relative;transition:box-shadow .2s;}
+.step-card:hover{box-shadow:0 12px 40px rgba(26,92,42,.1);}
+.step-num{font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--gold);letter-spacing:.12em;margin-bottom:.85rem;}
+.step-icon{width:54px;height:54px;border-radius:14px;background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem;}
+.step-card h4{font-family:var(--serif);font-size:1.1rem;margin-bottom:.45rem;color:var(--green);}
+.step-card p{font-size:.87rem;color:rgba(12,31,12,.52);line-height:1.65;}
+.step-connector{position:absolute;top:2.8rem;right:-1.1rem;font-size:1.2rem;color:var(--sand);z-index:2;}
+
+/* TARFIN-STYLE : Achetez maintenant payez à la récolte — section hero 2 */
+.harvest-section{background:var(--ink);color:#fff;position:relative;overflow:hidden;}
+.harvest-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(26,92,42,.5) 0%,transparent 60%);}
+.harvest-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2;}
+.harvest-left h2{color:#fff;font-size:clamp(1.8rem,3vw,2.8rem);}
+.harvest-left h2 em{color:var(--lime);}
+.harvest-left p{color:rgba(255,255,255,.6);margin-top:1rem;line-height:1.7;font-size:.97rem;}
+.harvest-cards{display:flex;flex-direction:column;gap:1rem;}
+.hcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.hcard-icon{font-size:1.6rem;flex-shrink:0;}
+.hcard h5{font-weight:600;font-size:.9rem;color:#fff;margin-bottom:.2rem;}
+.hcard p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+/* SCORING IA */
+.score-section{background:var(--green);color:#fff;position:relative;overflow:hidden;}
+.score-section::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(168,213,88,.07) 0%,transparent 70%);right:-150px;top:-150px;}
+.score-section .tag{color:var(--lime);}
+.score-section h2{color:#fff;}
+.score-section .section-sub{color:rgba(255,255,255,.58);}
+.score-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:center;margin-top:3rem;}
+.bars{display:flex;flex-direction:column;gap:1.2rem;}
+.bar-meta{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.38rem;}
+.bar-meta span:first-child{color:rgba(255,255,255,.68);}
+.bar-meta span:last-child{color:var(--lime);font-weight:600;font-family:var(--mono);font-size:.78rem;}
+.track{background:rgba(255,255,255,.09);border-radius:99px;height:5px;overflow:hidden;}
+.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--lime),var(--gold));}
+.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2.25rem;text-align:center;}
+.big-ring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.06) 72%);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 0 0 7px rgba(168,213,88,.07),0 0 50px rgba(168,213,88,.18);}
+.big-ring-inner{width:110px;height:110px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.big-val{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--lime);line-height:1;}
+.big-max{font-size:.75rem;color:rgba(255,255,255,.35);}
+.credit-label{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:.25rem;}
+.credit-amount{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--gold);}
+.credit-formula{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:.2rem;font-family:var(--mono);}
+
+/* DEVENEZ POINT DE COLLECTE — inspiré "Become a Retailer" Tarfin */
+.retailer-section{background:var(--sand);}
+.retailer-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.retailer-left .tag{color:var(--rust);}
+.retailer-left h2{color:var(--green);}
+.retailer-perks{display:flex;flex-direction:column;gap:.85rem;margin-top:2rem;}
+.perk{display:flex;align-items:flex-start;gap:.85rem;}
+.perk-icon{width:38px;height:38px;border-radius:10px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;border:1px solid rgba(26,92,42,.12);}
+.perk div h5{font-weight:600;font-size:.88rem;color:var(--green);margin-bottom:.15rem;}
+.perk div p{font-size:.8rem;color:rgba(12,31,12,.5);line-height:1.55;}
+.retailer-form{background:var(--paper);border-radius:16px;padding:2rem;border:1px solid rgba(26,92,42,.1);}
+.retailer-form h3{font-family:var(--serif);font-size:1.2rem;color:var(--green);margin-bottom:1.25rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:.78rem;font-weight:600;color:rgba(12,31,12,.6);margin-bottom:.35rem;letter-spacing:.03em;}
+.form-group input,.form-group select{width:100%;padding:.6rem .85rem;border:1.5px solid var(--sand);border-radius:8px;font-size:.87rem;font-family:var(--sans);background:#fff;color:var(--ink);outline:none;transition:border .2s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--green);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.form-submit{width:100%;padding:.75rem;background:var(--green);color:#fff;border:none;border-radius:9px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:var(--sans);transition:background .2s;margin-top:.5rem;}
+.form-submit:hover{background:var(--green2);}
+.form-note{font-size:.72rem;color:rgba(12,31,12,.35);margin-top:.75rem;text-align:center;line-height:1.5;}
+
+/* PS SECTION */
 .ps{background:var(--mist);}
 .ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
 .ps-card{border-radius:16px;padding:2rem;}
-.ps-card h3{font-family:var(--serif);font-size:1.2rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem;}
-.ps-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
-.ps-card li{font-size:.9rem;line-height:1.5;padding-left:1.5rem;position:relative;color:rgba(12,31,12,.7);}
+.ps-card h3{font-family:var(--serif);font-size:1.15rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.55rem;}
+.ps-card ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.ps-card li{font-size:.88rem;line-height:1.5;padding-left:1.5rem;position:relative;color:rgba(12,31,12,.68);}
 .ps-card li::before{position:absolute;left:0;font-weight:700;}
-.prob{background:#fff;border:1px solid rgba(201,79,44,.15);}
+.prob{background:#fff;border:1px solid rgba(201,79,44,.12);}
 .prob li::before{content:'✗';color:var(--rust);}
-.sol{background:var(--green);border:none;}
-.sol h3,.sol li{color:rgba(255,255,255,.9);}
+.sol{background:var(--green);}
+.sol h3,.sol li{color:rgba(255,255,255,.88);}
 .sol li::before{content:'✓';color:var(--lime);}
 
-.steps-section{background:var(--paper);}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
-.step-card{position:relative;}
-.step-num{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--gold);letter-spacing:.1em;margin-bottom:.75rem;}
-.step-icon-wrap{width:52px;height:52px;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
-.step-card h4{font-family:var(--serif);font-size:1.05rem;margin-bottom:.4rem;color:var(--green);}
-.step-card p{font-size:.85rem;color:rgba(12,31,12,.55);line-height:1.6;}
-.step-line{position:absolute;top:26px;right:-12px;width:24px;height:1px;background:var(--sand);}
-.step-card:last-child .step-line{display:none;}
-
-.score-section{background:var(--green);color:#fff;position:relative;overflow:hidden;}
-.score-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(168,213,88,.08) 0%,transparent 70%);right:-200px;top:-200px;}
-.score-section .tag{color:var(--lime);}
-.score-section h2{color:#fff;}
-.score-section .section-sub{color:rgba(255,255,255,.6);}
-.score-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:3rem;}
-.bars{display:flex;flex-direction:column;gap:1.25rem;}
-.bar-meta{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.4rem;}
-.bar-meta span:first-child{color:rgba(255,255,255,.7);}
-.bar-meta span:last-child{color:var(--lime);font-weight:600;font-family:var(--mono);}
-.track{background:rgba(255,255,255,.1);border-radius:99px;height:6px;overflow:hidden;}
-.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--lime),var(--gold));}
-.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2.5rem;text-align:center;}
-.big-ring{width:160px;height:160px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.07) 72%);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 0 0 8px rgba(168,213,88,.08),0 0 60px rgba(168,213,88,.2);}
-.big-ring-inner{width:118px;height:118px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.big-val{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--lime);line-height:1;}
-.big-max{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.1rem;}
-.credit-label{font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;}
-.credit-amount{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold);}
-.credit-formula{font-size:.78rem;color:rgba(255,255,255,.35);margin-top:.25rem;font-family:var(--mono);}
-
+/* API */
 .api-section{background:var(--paper);}
 .ep-groups{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
-.ep-group h3{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(12,31,12,.35);margin-bottom:.75rem;}
-.ep{display:flex;align-items:center;gap:.65rem;padding:.6rem .85rem;border-radius:8px;background:#fff;border:1px solid var(--sand);margin-bottom:.45rem;font-family:var(--mono);font-size:.8rem;color:var(--ink);}
-.method{min-width:42px;text-align:center;padding:.18rem .4rem;border-radius:4px;font-size:.68rem;font-weight:700;}
-.GET{background:#EBF5FF;color:#1565C0;}
+.ep-group h3{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(12,31,12,.32);margin-bottom:.7rem;}
+.ep{display:flex;align-items:center;gap:.6rem;padding:.58rem .8rem;border-radius:7px;background:#fff;border:1px solid var(--sand);margin-bottom:.4rem;font-family:var(--mono);font-size:.78rem;color:var(--ink);}
+.method{min-width:40px;text-align:center;padding:.16rem .38rem;border-radius:4px;font-size:.66rem;font-weight:700;}
+.GET{background:#EBF5FF;color:var(--blue);}
 .POST{background:#EFF8EC;color:var(--green);}
-.ep-desc{margin-left:auto;font-size:.72rem;color:rgba(12,31,12,.35);font-family:var(--sans);}
+.ep-desc{margin-left:auto;font-size:.7rem;color:rgba(12,31,12,.32);font-family:var(--sans);}
 
+/* STACK */
 .stack-section{background:var(--sand);}
-.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
-.stack-card{background:var(--paper);border-radius:12px;padding:1.2rem;border:1px solid rgba(26,92,42,.08);display:flex;flex-direction:column;gap:.4rem;}
-.stack-card .si{font-size:1.4rem;}
-.stack-card .sn{font-weight:600;font-size:.88rem;color:var(--green);}
-.stack-card .sd{font-size:.76rem;color:rgba(12,31,12,.45);}
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:2.5rem;}
+.stack-card{background:var(--paper);border-radius:11px;padding:1.1rem;border:1px solid rgba(26,92,42,.07);display:flex;flex-direction:column;gap:.35rem;}
+.si{font-size:1.3rem;}
+.sn{font-weight:600;font-size:.85rem;color:var(--green);}
+.sd{font-size:.73rem;color:rgba(12,31,12,.42);}
 
+/* PARTNERS */
 .partners-section{background:var(--paper);}
-.chips{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem;}
-.chip{background:var(--mist);border:1px solid rgba(26,92,42,.12);border-radius:99px;padding:.45rem 1.1rem;font-size:.85rem;font-weight:500;color:var(--green);}
+.chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem;}
+.chip{background:var(--mist);border:1px solid rgba(26,92,42,.11);border-radius:99px;padding:.42rem 1rem;font-size:.83rem;font-weight:500;color:var(--green);}
 
-.cta-section{background:var(--ink);padding:8rem 4rem;text-align:center;position:relative;overflow:hidden;}
-.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(26,92,42,.6) 0%,transparent 70%);}
+/* FAQ — inspiré Tarfin */
+.faq-section{background:var(--mist);}
+.faq-list{max-width:720px;margin:2.5rem auto 0;}
+.faq-item{border-bottom:1px solid var(--sand);overflow:hidden;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;cursor:pointer;font-weight:600;font-size:.95rem;color:var(--green);user-select:none;}
+.faq-q::after{content:'+';font-size:1.4rem;color:var(--gold);line-height:1;transition:transform .25s;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a p{padding:0 0 1.2rem;font-size:.88rem;color:rgba(12,31,12,.58);line-height:1.7;}
+
+/* CTA FINAL */
+.cta-section{background:var(--ink);padding:7rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(26,92,42,.55) 0%,transparent 68%);}
 .cta-section .tag{color:var(--lime);position:relative;z-index:2;}
-.cta-section h2{color:#fff;position:relative;z-index:2;max-width:600px;margin:0 auto 1rem;}
-.cta-section .section-sub{color:rgba(255,255,255,.55);margin:0 auto 3rem;position:relative;z-index:2;}
-.code-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem 2rem;text-align:left;max-width:520px;margin:0 auto 2.5rem;position:relative;z-index:2;}
-.code-block div{font-family:var(--mono);font-size:.85rem;line-height:2;color:rgba(168,213,88,.8);}
-.code-block .cm{color:rgba(255,255,255,.2);}
-.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
+.cta-section h2{color:#fff;position:relative;z-index:2;max-width:560px;margin:0 auto .9rem;}
+.cta-section .section-sub{color:rgba(255,255,255,.52);margin:0 auto 2.75rem;position:relative;z-index:2;}
+.code-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.35rem 1.85rem;text-align:left;max-width:500px;margin:0 auto 2.5rem;position:relative;z-index:2;}
+.code-block div{font-family:var(--mono);font-size:.83rem;line-height:2;color:rgba(168,213,88,.8);}
+.code-block .cm{color:rgba(255,255,255,.18);}
+.cta-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
 
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2rem 4rem;text-align:center;font-size:.82rem;color:rgba(255,255,255,.3);}
-footer a{color:rgba(255,255,255,.5);text-decoration:none;}
-footer a:hover{color:rgba(255,255,255,.9);}
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.05);padding:2rem 4rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.28);}
+footer a{color:rgba(255,255,255,.46);text-decoration:none;}
+footer a:hover{color:#fff;}
 
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
 .fade-in.visible{opacity:1;transform:none;}
 
+/* RESPONSIVE */
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;}
-  .hero-right{min-height:50vh;padding:3rem;}
+  .hero,.harvest-grid,.score-layout,.retailer-grid,.ps-grid,.ep-groups{grid-template-columns:1fr;}
+  .hero-right{min-height:55vh;padding:3rem 2rem;}
   .hero-left{padding:3rem 2rem;}
   section{padding:4rem 2rem;}
-  .ps-grid,.steps-grid,.score-layout,.ep-groups,.stack-grid{grid-template-columns:1fr;}
+  .steps-grid,.stack-grid,.numbers-grid{grid-template-columns:1fr 1fr;}
   nav{padding:1rem 1.5rem;}
   .nav-r a:not(.nav-cta){display:none;}
-  .step-line{display:none;}
+  .step-connector{display:none;}
+  .form-row{grid-template-columns:1fr;}
+  .num-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);}
+}
+@media(max-width:480px){
+  .steps-grid,.stack-grid,.numbers-grid,.hero-stats{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a class="logo" href="#">TONTINE<sup>+</sup></a>
   <div class="nav-r">
     <a href="#comment">Fonctionnement</a>
-    <a href="#api">API</a>
-    <a href="#stack">Stack</a>
+    <a href="#retailer">Point de collecte</a>
+    <a href="#faq">FAQ</a>
     <a href="https://github.com/doundou969/agri-tontine-diourbel" target="_blank" class="nav-cta">GitHub →</a>
   </div>
 </nav>
 
+<!-- BANDEAU HARVEST — headline Tarfin style -->
+<div class="harvest-banner" style="margin-top:3.8rem;">
+  🌾 Achetez vos semences & engrais aujourd'hui — <span>payez après la récolte</span>
+</div>
+
+<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
     <div class="pill">🏆 Candidature AYuTe Africa Challenge 2026</div>
-    <h1>La tontine de village devient une <em>banque numérique</em></h1>
-    <p class="hero-sub">Digitalisez vos tontines agricoles pour financer semences et engrais — sans banque, sans garantie, avec Wave. Scoring IA automatique à chaque cotisation.</p>
+    <h1>Vos intrants maintenant, <em>votre récolte</em> d'abord</h1>
+    <p class="hero-sub">TONTINE+ finance semences, engrais et équipements agricoles via vos tontines digitalisées. Scoring IA, paiement Wave, zéro banque. Conçu pour Diourbel.</p>
     <div class="hero-btns">
-      <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-solid" target="_blank">⬇ Cloner sur GitHub</a>
+      <a href="#retailer" class="btn btn-gold">🌿 Devenir point de collecte</a>
       <a href="#comment" class="btn btn-ghost">Comment ça marche</a>
     </div>
+    <p class="hero-note">Ou téléchargez bientôt l'app Wave-compatible → pilote Diourbel S1 2026</p>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-val">50k</div><div class="stat-lbl">Paysans cibles · Diourbel</div></div>
-      <div class="stat-item"><div class="stat-val">1,5%</div><div class="stat-lbl">Commission Wave</div></div>
-      <div class="stat-item"><div class="stat-val">15M F</div><div class="stat-lbl">Subvention AYuTe max</div></div>
+      <div><div class="stat-val">5</div><div class="stat-lbl">Tontines pilotes actives</div></div>
+      <div><div class="stat-val">50+</div><div class="stat-lbl">Paysans inscrits</div></div>
+      <div><div class="stat-val">3</div><div class="stat-lbl">Crédits intrants approuvés</div></div>
+      <div><div class="stat-val">1,5%</div><div class="stat-lbl">Commission/transaction</div></div>
     </div>
   </div>
   <div class="hero-right">
     <div class="mockup">
-      <div class="mockup-header">
+      <div class="mh">
         <div class="avatar">👨‍🌾</div>
         <div><p>Baye Sène</p><p>Touba Toul · Diourbel</p></div>
       </div>
@@ -213,67 +304,151 @@ footer a:hover{color:rgba(255,255,255,.9);}
         <div class="ring"><div class="ring-inner"><div class="ring-val">72</div><div class="ring-max">/ 100</div></div></div>
         <div class="ring-label">Score de crédit</div>
       </div>
-      <div class="mockup-rows">
-        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">🌱</span><span>Tontine Baye Sène</span></div><span class="mock-chip chip-g">actif</span></div>
-        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">💸</span><span>Cotisation semaine 8</span></div><span class="mock-chip chip-g">payée</span></div>
-        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">🏦</span><span>Crédit intrants DER</span></div><span class="mock-chip chip-y">72 000 F</span></div>
-        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">⚠️</span><span>Tour précédent</span></div><span class="mock-chip chip-r">retard ×1</span></div>
+      <div class="mock-rows">
+        <div class="mr"><div class="mr-l"><span class="mi">🌱</span><span>Tontine Baye Sène</span></div><span class="mc cg">actif</span></div>
+        <div class="mr"><div class="mr-l"><span class="mi">💸</span><span>Cotisation semaine 8</span></div><span class="mc cg">payée</span></div>
+        <div class="mr"><div class="mr-l"><span class="mi">🏦</span><span>Crédit intrants DER</span></div><span class="mc cy">72 000 F</span></div>
+        <div class="mr"><div class="mr-l"><span class="mi">⚠️</span><span>Tour précédent</span></div><span class="mc cr">retard ×1</span></div>
       </div>
       <button class="wave-btn">💳 Payer via Wave</button>
     </div>
   </div>
 </div>
 
+<!-- CHIFFRES TRACTION -->
+<section class="numbers-section" style="padding:0;">
+  <div class="numbers-grid">
+    <div class="num-card fade-in">
+      <div class="num-icon">👨‍🌾</div>
+      <div class="num-val">50 000</div>
+      <div class="num-lbl">Paysans cibles</div>
+      <div class="num-sub">Région Diourbel · phase 1</div>
+    </div>
+    <div class="num-card fade-in">
+      <div class="num-icon">🌾</div>
+      <div class="num-val">48 000 t</div>
+      <div class="num-lbl">Arachide / an · Diourbel</div>
+      <div class="num-sub">Partenariat SONACOS</div>
+    </div>
+    <div class="num-card fade-in">
+      <div class="num-icon">💳</div>
+      <div class="num-val">15M FCFA</div>
+      <div class="num-lbl">Subvention AYuTe max</div>
+      <div class="num-sub">Candidature en cours</div>
+    </div>
+    <div class="num-card fade-in">
+      <div class="num-icon">⏱</div>
+      <div class="num-val">4 sem.</div>
+      <div class="num-lbl">MVP opérationnel</div>
+      <div class="num-sub">Python Flask · SQLite · Wave</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT ÇA MARCHE — 3 steps Tarfin style -->
+<section style="background:var(--paper);" id="comment">
+  <div class="container">
+    <div class="tag fade-in">Fonctionnement</div>
+    <h2 class="fade-in">3 étapes, votre récolte fait le reste</h2>
+    <p class="section-sub fade-in">Comme Tarfin en Turquie — mais pensé pour les tontines sénégalaises et le réseau Wave.</p>
+    <div class="steps-grid">
+      <div class="step-card fade-in">
+        <div class="step-num">ÉTAPE 01</div>
+        <div class="step-icon">📱</div>
+        <h4>Inscrivez votre tontine</h4>
+        <p>Numéro Wave +221, nom du groupe, montant et fréquence. Chaque cotisation est tracée en temps réel. Compte actif en 2 minutes.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-num">ÉTAPE 02</div>
+        <div class="step-icon">🤖</div>
+        <h4>Obtenez votre score IA</h4>
+        <p>Après 3 cotisations, votre score de crédit (0–100) est calculé automatiquement. Score ≥ 40 : vous êtes éligible au microcrédit intrants.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-num">ÉTAPE 03</div>
+        <div class="step-icon">🌱</div>
+        <h4>Récupérez vos intrants</h4>
+        <p>Choisissez semences ou engrais chez un point de collecte agréé. Payez à la récolte via Wave. Zéro déplacement à la banque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHETEZ MAINTENANT PAYEZ À LA RÉCOLTE — section inspirée Tarfin -->
+<section class="harvest-section">
+  <div class="container">
+    <div class="harvest-grid">
+      <div class="harvest-left fade-in">
+        <div class="tag" style="color:var(--lime);">Financement intrants</div>
+        <h2>Achetez maintenant,<br>payez <em>après la récolte</em></h2>
+        <p>Comme des milliers de fermiers en Turquie avec Tarfin — TONTINE+ adapte ce modèle éprouvé aux réalités sénégalaises : tontines, Wave, arachide, hivernage.</p>
+        <div style="margin-top:2rem;">
+          <a href="#retailer" class="btn btn-gold">Devenir point de collecte →</a>
+        </div>
+      </div>
+      <div class="harvest-cards fade-in">
+        <div class="hcard">
+          <div class="hcard-icon">🥜</div>
+          <div><h5>Semences certifiées arachide</h5><p>Variétés ISRA adaptées à Diourbel, livrées chez votre coopérative agréée.</p></div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">🌿</div>
+          <div><h5>Engrais NPK & DAP</h5><p>Aux prix du marché SONACOS, sans intermédiaires. Comparaison de prix bientôt.</p></div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">💊</div>
+          <div><h5>Pesticides homologués</h5><p>Produits agréés DPV, application tracée dans votre dossier de crédit.</p></div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">⚙️</div>
+          <div><h5>Petit équipement agricole</h5><p>Pulvérisateurs, semoirs manuels — financement jusqu'à votre plafond crédit.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÈME / SOLUTION -->
 <section class="ps" id="pourquoi">
   <div class="container">
     <div class="tag fade-in">Pourquoi TONTINE+</div>
     <h2 class="fade-in">Le crédit agricole bloque les rendements</h2>
-    <p class="section-sub fade-in">70% des paysans sénégalais n'accèdent pas au crédit formel. Les tontines informelles existent partout — mais opaques, risquées, sans levier financier.</p>
+    <p class="section-sub fade-in">70% des paysans sénégalais n'ont pas accès au crédit formel. Les tontines existent partout — mais sans traçabilité ni levier financier.</p>
     <div class="ps-grid">
       <div class="ps-card prob fade-in">
-        <h3>❌ Tontine traditionnelle</h3>
+        <h3>❌ Sans TONTINE+</h3>
         <ul>
-          <li>Aucune traçabilité des cotisations</li>
-          <li>Fraudes et conflits fréquents</li>
-          <li>Pas de scoring → accès aléatoire</li>
-          <li>Zéro accès au crédit externe</li>
+          <li>Tontines opaques : zéro traçabilité</li>
+          <li>Prêteurs à 30–50%/mois</li>
+          <li>Pas de scoring → crédit aléatoire</li>
           <li>Réunions physiques obligatoires</li>
           <li>−40% rendement faute d'intrants</li>
+          <li>Cycle de pauvreté agricole permanent</li>
         </ul>
       </div>
       <div class="ps-card sol fade-in">
-        <h3>✅ TONTINE+</h3>
+        <h3>✅ Avec TONTINE+</h3>
         <ul>
-          <li>Chaque cotisation enregistrée en base</li>
-          <li>Transparence totale pour tous les membres</li>
-          <li>Scoring IA → microcrédits mérités</li>
-          <li>Partenariats DER · FADA · PAM CAS</li>
-          <li>Paiement Wave depuis n'importe où</li>
-          <li>+30% rendements avec intrants financés</li>
+          <li>Chaque cotisation Wave tracée en DB</li>
+          <li>Score IA transparent : 0 à 100</li>
+          <li>Microcrédits intrants via DER · FADA</li>
+          <li>Paiement mobile depuis n'importe où</li>
+          <li>+30% rendements avec bons intrants</li>
+          <li>Remboursement après récolte — zéro pression</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="steps-section" id="comment">
-  <div class="container">
-    <div class="tag fade-in">Fonctionnement</div>
-    <h2 class="fade-in">En 4 étapes simples</h2>
-    <div class="steps-grid">
-      <div class="step-card fade-in"><div class="step-num">01 —</div><div class="step-icon-wrap">📱</div><h4>S'inscrire</h4><p>Numéro Wave +221. Compte créé en 30 secondes. Zéro document.</p><div class="step-line"></div></div>
-      <div class="step-card fade-in"><div class="step-num">02 —</div><div class="step-icon-wrap">🤝</div><h4>Rejoindre</h4><p>Créer ou rejoindre une tontine du village. L'admin fixe montant et fréquence.</p><div class="step-line"></div></div>
-      <div class="step-card fade-in"><div class="step-num">03 —</div><div class="step-icon-wrap">💸</div><h4>Cotiser via Wave</h4><p>Chaque paiement tracé. Score IA recalculé automatiquement.</p><div class="step-line"></div></div>
-      <div class="step-card fade-in"><div class="step-num">04 —</div><div class="step-icon-wrap">🌱</div><h4>Obtenir un crédit</h4><p>Score ≥ 40 → microcrédits semences et engrais via DER ou FADA.</p></div>
-    </div>
-  </div>
-</section>
-
+<!-- SCORING IA -->
 <section class="score-section">
   <div class="container">
     <div class="tag fade-in">Scoring IA</div>
-    <h2 class="fade-in">Un score de crédit juste et transparent</h2>
-    <p class="section-sub fade-in">Calculé automatiquement après chaque cotisation. Aucune banque ne décide — l'algorithme oui.</p>
+    <h2 class="fade-in">Un score de crédit juste, <br>basé sur vos actes</h2>
+    <p class="section-sub fade-in">Calculé après chaque cotisation Wave. Votre historique de tontine devient votre dossier bancaire.</p>
     <div class="score-layout">
       <div class="bars fade-in">
         <div class="bar-item"><div class="bar-meta"><span>Taux de paiement des cotisations</span><span>60 pts</span></div><div class="track"><div class="fill" style="width:60%"></div></div></div>
@@ -281,22 +456,88 @@ footer a:hover{color:rgba(255,255,255,.9);}
         <div class="bar-item"><div class="bar-meta"><span>Volume & ancienneté</span><span>10 pts</span></div><div class="track"><div class="fill" style="width:10%"></div></div></div>
         <div class="bar-item"><div class="bar-meta"><span>Crédits remboursés (bonus)</span><span>10 pts</span></div><div class="track"><div class="fill" style="width:10%"></div></div></div>
         <div class="bar-item"><div class="bar-meta"><span>Malus par retard</span><span style="color:#FF7F6A;">−5 pts</span></div><div class="track"><div class="fill" style="width:5%;background:linear-gradient(90deg,#FF7F6A,#C94F2C)"></div></div></div>
+        <div style="margin-top:1.5rem;background:rgba(255,255,255,.06);border-radius:10px;padding:1rem 1.25rem;">
+          <p style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;">💡 <strong style="color:rgba(255,255,255,.8);">Futur :</strong> Indexation sur le cours de l'arachide SONACOS — si la récolte est mauvaise, le remboursement s'ajuste. Inspiré du "Income-Protected Package" de Tarfin.</p>
+        </div>
       </div>
       <div class="score-card fade-in">
         <div class="big-ring"><div class="big-ring-inner"><div class="big-val">72</div><div class="big-max">/ 100</div></div></div>
         <div class="credit-label">Plafond crédit débloqué</div>
         <div class="credit-amount">72 000 FCFA</div>
         <div class="credit-formula">score × 1 000 FCFA = montant max</div>
+        <div style="margin-top:1.25rem;padding:.75rem;background:rgba(168,213,88,.08);border-radius:8px;font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;">Score ≥ 40 → éligible<br>Remboursement après la récolte</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- DEVENEZ POINT DE COLLECTE — inspiré Become a Retailer Tarfin -->
+<section class="retailer-section" id="retailer">
+  <div class="container">
+    <div class="retailer-grid">
+      <div class="retailer-left fade-in">
+        <div class="tag">Pour les coopératives & boutiques</div>
+        <h2>Devenez point de collecte agréé</h2>
+        <p class="section-sub">Rejoignez le réseau TONTINE+ et connectez vos clients paysans au financement intrants. Zéro investissement de votre côté.</p>
+        <div class="retailer-perks">
+          <div class="perk">
+            <div class="perk-icon">📦</div>
+            <div><h5>Stock garanti par DER/FADA</h5><p>Les paysans éligibles retirent leurs intrants directement chez vous. Paiement garanti par le fonds de crédit.</p></div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">📊</div>
+            <div><h5>Dashboard transactions</h5><p>Suivez en temps réel les retraits, confirmez les livraisons, gérez vos stocks partenaires.</p></div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">💰</div>
+            <div><h5>Commission sur chaque retrait</h5><p>Revenus additionnels pour votre boutique sans risque de crédit — TONTINE+ porte le risque.</p></div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🗺️</div>
+            <div><h5>Visible sur la carte TONTINE+</h5><p>Votre point de collecte géolocalisé dans l'app — nouveaux clients automatiques.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="retailer-form fade-in">
+        <h3>S'inscrire comme point de collecte</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nom de la boutique / coopérative</label><input type="text" placeholder="Ex: Coopérative Baye Sène"/></div>
+          <div class="form-group"><label>Responsable</label><input type="text" placeholder="Prénom Nom"/></div>
+        </div>
+        <div class="form-group"><label>Téléphone Wave</label><input type="tel" placeholder="+221 7X XXX XX XX"/></div>
+        <div class="form-group">
+          <label>Localisation</label>
+          <select>
+            <option value="">— Sélectionner un département —</option>
+            <option>Diourbel</option><option>Bambey</option><option>Mbacké</option>
+            <option>Touba</option><option>Thiès</option><option>Kaolack</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Type de point de vente</label>
+          <select>
+            <option>Boutique intrants agricoles</option>
+            <option>Coopérative villageoise</option>
+            <option>Revendeur SONACOS agréé</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="this.textContent='✅ Demande envoyée — on vous rappelle !';this.style.background='#2E8B47';">
+          Envoyer ma candidature →
+        </button>
+        <p class="form-note">Nous vous contactons sous 48h. Aucun engagement financier requis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
 <section class="api-section" id="api">
   <div class="container">
     <div class="tag fade-in">API REST Flask</div>
     <h2 class="fade-in">13 endpoints, tout en JSON</h2>
-    <p class="section-sub fade-in">Auth JWT · SQLite dev → PostgreSQL prod · Mode sandbox Wave inclus.</p>
+    <p class="section-sub fade-in">Auth JWT · SQLite dev → PostgreSQL prod · Mode sandbox Wave · CI/CD GitHub Actions.</p>
     <div class="ep-groups">
       <div>
         <div class="ep-group fade-in"><h3>🔐 Authentification</h3>
@@ -304,7 +545,7 @@ footer a:hover{color:rgba(255,255,255,.9);}
           <div class="ep"><span class="method POST">POST</span>/api/auth/login<span class="ep-desc">Token JWT 24h</span></div>
           <div class="ep"><span class="method GET">GET</span>/api/auth/me<span class="ep-desc">Profil + score</span></div>
         </div>
-        <div class="ep-group fade-in" style="margin-top:1.5rem"><h3>💸 Cotisations</h3>
+        <div class="ep-group fade-in" style="margin-top:1.4rem"><h3>💸 Cotisations</h3>
           <div class="ep"><span class="method POST">POST</span>/api/cotisations/payer<span class="ep-desc">Wave + scoring auto</span></div>
           <div class="ep"><span class="method GET">GET</span>/api/cotisations/historique/&lt;id&gt;</div>
           <div class="ep"><span class="method GET">GET</span>/api/cotisations/retards/&lt;id&gt;</div>
@@ -317,7 +558,7 @@ footer a:hover{color:rgba(255,255,255,.9);}
           <div class="ep"><span class="method GET">GET</span>/api/tontines/&lt;id&gt;</div>
           <div class="ep"><span class="method POST">POST</span>/api/tontines/&lt;id&gt;/rejoindre</div>
         </div>
-        <div class="ep-group fade-in" style="margin-top:1.5rem"><h3>🌱 Crédits Intrants</h3>
+        <div class="ep-group fade-in" style="margin-top:1.4rem"><h3>🌱 Crédits Intrants</h3>
           <div class="ep"><span class="method POST">POST</span>/api/credits/demander<span class="ep-desc">Scoré en temps réel</span></div>
           <div class="ep"><span class="method GET">GET</span>/api/credits/mes-credits</div>
           <div class="ep"><span class="method POST">POST</span>/api/credits/&lt;id&gt;/rembourser</div>
@@ -327,6 +568,7 @@ footer a:hover{color:rgba(255,255,255,.9);}
   </div>
 </section>
 
+<!-- STACK -->
 <section class="stack-section" id="stack">
   <div class="container">
     <div class="tag fade-in">Technologies</div>
@@ -337,13 +579,14 @@ footer a:hover{color:rgba(255,255,255,.9);}
       <div class="stack-card fade-in"><div class="si">🔐</div><div class="sn">JWT Extended</div><div class="sd">Auth stateless mobile</div></div>
       <div class="stack-card fade-in"><div class="si">💳</div><div class="sn">Wave API sandbox</div><div class="sd">Mobile money Sénégal</div></div>
       <div class="stack-card fade-in"><div class="si">📱</div><div class="sn">Africa's Talking</div><div class="sd">SMS USSD hors-ligne</div></div>
-      <div class="stack-card fade-in"><div class="si">🤖</div><div class="sn">Scoring IA</div><div class="sd">Formule pondérée → ML v2</div></div>
+      <div class="stack-card fade-in"><div class="si">🤖</div><div class="sn">Scoring IA</div><div class="sd">Formule → ML RandomForest v2</div></div>
       <div class="stack-card fade-in"><div class="si">⚙️</div><div class="sn">GitHub Actions CI</div><div class="sd">pytest + flake8 auto</div></div>
       <div class="stack-card fade-in"><div class="si">🚀</div><div class="sn">Replit / Render</div><div class="sd">Déploiement immédiat</div></div>
     </div>
   </div>
 </section>
 
+<!-- PARTENAIRES -->
 <section class="partners-section">
   <div class="container">
     <div class="tag fade-in">Écosystème</div>
@@ -361,6 +604,37 @@ footer a:hover{color:rgba(255,255,255,.9);}
   </div>
 </section>
 
+<!-- FAQ — inspiré Tarfin -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="tag fade-in" style="text-align:center;">Questions fréquentes</div>
+    <h2 class="fade-in" style="text-align:center;">Tout ce que vous devez savoir</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Comment acheter mes intrants avec TONTINE+ ?</div>
+        <div class="faq-a"><p>Inscrivez-vous avec votre numéro Wave (+221), rejoignez ou créez une tontine, cotisez pendant au moins 3 tours. Votre score IA est calculé automatiquement. Si votre score est ≥ 40, vous pouvez demander un microcrédit intrants et récupérer vos semences ou engrais chez un point de collecte agréé près de chez vous.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quels intrants puis-je financer ?</div>
+        <div class="faq-a"><p>Semences certifiées arachide (variétés ISRA), engrais NPK et DAP, pesticides homologués DPV, et petit équipement agricole (pulvérisateurs, semoirs manuels). La liste s'étend selon les partenariats SONACOS et coopératives locales.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quand dois-je rembourser le crédit ?</div>
+        <div class="faq-a"><p>Le remboursement se fait après la récolte — généralement 6 mois après l'octroi du crédit. Vous remboursez via Wave en un clic. Si votre récolte est impactée par des aléas climatiques, contactez votre point de collecte pour un rééchelonnement.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Y a-t-il des frais cachés ?</div>
+        <div class="faq-a"><p>Non. TONTINE+ prélève une commission de 1,5% sur chaque transaction Wave et 2 000 FCFA de frais de dossier pour les crédits approuvés. Aucun autre frais. Aucun intérêt sur les cotisations de tontine.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment devenir point de collecte agréé ?</div>
+        <div class="faq-a"><p>Remplissez le formulaire dans la section "Devenir point de collecte". Nous vous contactons sous 48h. Aucun investissement requis — vous bénéficiez d'une commission sur chaque retrait d'intrant effectué dans votre boutique et d'une visibilité sur la carte TONTINE+.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
 <section class="cta-section">
   <div class="tag">Open Source · MIT</div>
   <h2>Prêt à démarrer en 3 commandes</h2>
@@ -375,22 +649,35 @@ footer a:hover{color:rgba(255,255,255,.9);}
   </div>
   <div class="cta-btns">
     <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-solid" target="_blank">⭐ Voir sur GitHub</a>
-    <a href="https://github.com/doundou969/agri-tontine-diourbel/archive/refs/heads/main.zip" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);" target="_blank">⬇ Télécharger ZIP</a>
+    <a href="#retailer" class="btn btn-gold">🌿 Devenir point de collecte</a>
+    <a href="https://github.com/doundou969/agri-tontine-diourbel/archive/refs/heads/main.zip" class="btn" style="background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.18);" target="_blank">⬇ ZIP</a>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>🌾 <strong style="color:rgba(255,255,255,.6)">TONTINE+</strong> · Fintech Agricole · Diourbel, Sénégal &nbsp;·&nbsp;
+  <p>🌾 <strong style="color:rgba(255,255,255,.55)">TONTINE+</strong> · Fintech Agricole · Diourbel, Sénégal &nbsp;·&nbsp;
   <a href="https://github.com/doundou969/agri-tontine-diourbel" target="_blank">GitHub</a> &nbsp;·&nbsp;
   <a href="https://doundou969.github.io/agri-tontine-diourbel/" target="_blank">doundou969.github.io</a> &nbsp;·&nbsp; MIT</p>
-  <p style="margin-top:.4rem;opacity:.5;">Candidature AYuTe Africa Challenge 2026 · VITAGRO/NOVAGRI · Agropole Diourbel</p>
+  <p style="margin-top:.35rem;opacity:.4;">Candidature AYuTe Africa Challenge 2026 · VITAGRO/NOVAGRI · Agropole Diourbel · Inspiré par Tarfin (Turquie)</p>
 </footer>
 
 <script>
+// Scroll fade-in
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:.12});
+},{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
