@@ -1,368 +1,236 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TONTINE+ — Fintech Agricole · Diourbel</title>
-  <meta name="description" content="Digitalisez vos tontines pour financer les intrants agricoles. API Flask, scoring IA, paiements Wave. Candidature AYuTe 2026." />
-  <meta property="og:title" content="TONTINE+ — Fintech Tontine Agricole Sénégal" />
-  <meta property="og:description" content="Transformez vos tontines de village en banque coopérative numérique pour financer les intrants agricoles." />
-  <meta property="og:url" content="https://doundou969.github.io/agri-tontine-diourbel" />
-  <style>
-    :root {
-      --green:       #1B6B2F;
-      --green-light: #E8F5E9;
-      --green-dark:  #0D3D1A;
-      --gold:        #C8871A;
-      --gold-light:  #FFF8E1;
-      --blue:        #1565C0;
-      --blue-light:  #E3F2FD;
-      --red:         #C62828;
-      --grey:        #F5F5F5;
-      --text:        #1A2E1A;
-      --text-light:  #555;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TONTINE+ · Fintech Agricole · Diourbel</title>
+<meta name="description" content="La tontine de village devient une banque numérique. Financement intrants agricoles via scoring IA et Wave. Diourbel, Sénégal."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0C1F0C;
+  --paper:#F7F4EE;
+  --green:#1A5C2A;
+  --green2:#2E8B47;
+  --lime:#A8D558;
+  --gold:#D4A017;
+  --rust:#C94F2C;
+  --sand:#E8DFC8;
+  --mist:#EFF5EE;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");background-size:128px;}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(247,244,238,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,92,42,.1);}
+.logo{font-family:var(--serif);font-size:1.25rem;font-weight:900;color:var(--green);letter-spacing:-.02em;text-decoration:none;}
+.logo sup{font-size:.55rem;vertical-align:super;color:var(--gold);letter-spacing:.1em;}
+.nav-r{display:flex;gap:2rem;align-items:center;}
+.nav-r a{font-size:.85rem;font-weight:500;color:var(--ink);text-decoration:none;opacity:.6;transition:opacity .2s;}
+.nav-r a:hover{opacity:1;}
+.nav-cta{background:var(--green);color:#fff!important;opacity:1!important;padding:.45rem 1.1rem;border-radius:6px;font-size:.82rem!important;font-weight:600!important;transition:background .2s!important;}
+.nav-cta:hover{background:var(--green2)!important;}
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: var(--text);
-      line-height: 1.6;
-      background: #fff;
-    }
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:5rem;overflow:hidden;position:relative;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3rem 5rem 4rem;position:relative;z-index:2;}
+.pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--sand);border:1px solid rgba(26,92,42,.2);padding:.35rem .9rem;border-radius:99px;font-size:.78rem;font-weight:600;color:var(--green);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2rem;width:fit-content;}
+.pill::before{content:'';width:7px;height:7px;background:var(--lime);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--serif);font-size:clamp(3rem,5vw,4.5rem);line-height:1.05;letter-spacing:-.03em;color:var(--green);margin-bottom:1.5rem;}
+h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:1.05rem;line-height:1.65;color:rgba(12,31,12,.6);max-width:440px;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.btn-solid{background:var(--green);color:#fff;}
+.btn-ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--sand);}
+.stat-val{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--green);line-height:1;}
+.stat-lbl{font-size:.75rem;color:rgba(12,31,12,.5);margin-top:.25rem;font-weight:500;}
 
-    /* ── NAV ─────────────────── */
-    nav {
-      background: var(--green-dark);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; text-decoration: none; }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .9rem; transition: color .2s; }
-    .nav-links a:hover { color: #fff; }
-    .nav-cta {
-      background: var(--gold);
-      color: #fff !important;
-      padding: .4rem 1rem;
-      border-radius: 6px;
-      font-weight: 600;
-    }
+.hero-right{background:var(--green);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-right::before{content:'';position:absolute;width:120%;height:120%;background:radial-gradient(ellipse at 30% 40%,rgba(168,213,88,.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 70%,rgba(212,160,23,.1) 0%,transparent 50%);}
+.mockup{position:relative;z-index:2;width:320px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:1.5rem;backdrop-filter:blur(8px);box-shadow:0 32px 80px rgba(0,0,0,.4);}
+.mockup-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.1);}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.mockup-header div p:first-child{color:#fff;font-weight:600;font-size:.9rem;}
+.mockup-header div p:last-child{color:rgba(255,255,255,.5);font-size:.75rem;}
+.score-ring{display:flex;flex-direction:column;align-items:center;margin:1rem 0 1.5rem;}
+.ring{width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.08) 72%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(168,213,88,.2),0 0 40px rgba(168,213,88,.15);}
+.ring-inner{width:80px;height:80px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-val{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--lime);line-height:1;}
+.ring-max{font-size:.65rem;color:rgba(255,255,255,.4);}
+.ring-label{margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase;}
+.mockup-rows{display:flex;flex-direction:column;gap:.6rem;}
+.mock-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border-radius:8px;padding:.6rem .8rem;}
+.mock-row-l{display:flex;align-items:center;gap:.6rem;}
+.mock-icon{font-size:.9rem;}
+.mock-row-l span{font-size:.8rem;color:rgba(255,255,255,.7);}
+.mock-chip{font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:99px;}
+.chip-g{background:rgba(168,213,88,.2);color:var(--lime);}
+.chip-y{background:rgba(212,160,23,.2);color:var(--gold);}
+.chip-r{background:rgba(201,79,44,.2);color:#FF7F6A;}
+.wave-btn{margin-top:1rem;width:100%;background:var(--lime);color:var(--green);border:none;border-radius:10px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:default;letter-spacing:.02em;}
 
-    /* ── HERO ─────────────────── */
-    .hero {
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, #2E8B3C 100%);
-      color: #fff;
-      padding: 5rem 2rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      background: rgba(255,255,255,.04);
-      border-radius: 50%;
-      top: -200px; right: -200px;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.3);
-      padding: .3rem 1rem;
-      border-radius: 20px;
-      font-size: .85rem;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(4px);
-    }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: .5rem; }
-    .hero h1 span { color: #FFD54F; }
-    .hero p { font-size: 1.15rem; opacity: .9; max-width: 600px; margin: 0 auto 2.5rem; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      padding: .75rem 1.75rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform .15s, box-shadow .15s;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
-    .btn-primary { background: var(--gold); color: #fff; }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); }
+section{padding:6rem 4rem;}
+.container{max-width:1100px;margin:0 auto;}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;letter-spacing:-.02em;color:var(--green);line-height:1.15;margin-bottom:1rem;}
+.section-sub{color:rgba(12,31,12,.55);font-size:1rem;line-height:1.7;max-width:520px;}
 
-    /* ── STATS ─────────────────── */
-    .stats {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0;
-      background: #fff;
-      box-shadow: 0 4px 24px rgba(0,0,0,.08);
-      border-radius: 16px;
-      max-width: 800px;
-      margin: -2rem auto 0;
-      position: relative;
-      z-index: 10;
-      overflow: hidden;
-    }
-    .stat {
-      flex: 1;
-      min-width: 160px;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      border-right: 1px solid #eee;
-    }
-    .stat:last-child { border-right: none; }
-    .stat-val { font-size: 1.8rem; font-weight: 800; color: var(--green); }
-    .stat-label { font-size: .8rem; color: var(--text-light); margin-top: .2rem; }
+.ps{background:var(--mist);}
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.ps-card{border-radius:16px;padding:2rem;}
+.ps-card h3{font-family:var(--serif);font-size:1.2rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem;}
+.ps-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.ps-card li{font-size:.9rem;line-height:1.5;padding-left:1.5rem;position:relative;color:rgba(12,31,12,.7);}
+.ps-card li::before{position:absolute;left:0;font-weight:700;}
+.prob{background:#fff;border:1px solid rgba(201,79,44,.15);}
+.prob li::before{content:'✗';color:var(--rust);}
+.sol{background:var(--green);border:none;}
+.sol h3,.sol li{color:rgba(255,255,255,.9);}
+.sol li::before{content:'✓';color:var(--lime);}
 
-    /* ── SECTION WRAPPER ─────── */
-    section { padding: 5rem 2rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-tag { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: .5rem; }
-    .section-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: var(--green-dark); margin-bottom: 1rem; }
-    .section-sub { color: var(--text-light); max-width: 560px; }
+.steps-section{background:var(--paper);}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+.step-card{position:relative;}
+.step-num{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--gold);letter-spacing:.1em;margin-bottom:.75rem;}
+.step-icon-wrap{width:52px;height:52px;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+.step-card h4{font-family:var(--serif);font-size:1.05rem;margin-bottom:.4rem;color:var(--green);}
+.step-card p{font-size:.85rem;color:rgba(12,31,12,.55);line-height:1.6;}
+.step-line{position:absolute;top:26px;right:-12px;width:24px;height:1px;background:var(--sand);}
+.step-card:last-child .step-line{display:none;}
 
-    /* ── PROBLEM / SOLUTION ──── */
-    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
-    @media(max-width:680px){ .ps-grid { grid-template-columns: 1fr; } }
-    .ps-card {
-      border-radius: 12px;
-      padding: 2rem;
-      border-top: 4px solid var(--red);
-    }
-    .ps-card.solution { border-color: var(--green); }
-    .ps-card h3 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
-    .ps-card ul { list-style: none; }
-    .ps-card ul li {
-      padding: .45rem 0;
-      padding-left: 1.4rem;
-      position: relative;
-      font-size: .95rem;
-      border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-    .ps-card ul li:last-child { border-bottom: none; }
-    .ps-card ul li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
-    .ps-card.solution ul li::before { content: '✓'; color: var(--green); }
-    .problem-card { background: var(--grey); }
-    .solution-card { background: var(--green-light); }
+.score-section{background:var(--green);color:#fff;position:relative;overflow:hidden;}
+.score-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(168,213,88,.08) 0%,transparent 70%);right:-200px;top:-200px;}
+.score-section .tag{color:var(--lime);}
+.score-section h2{color:#fff;}
+.score-section .section-sub{color:rgba(255,255,255,.6);}
+.score-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:3rem;}
+.bars{display:flex;flex-direction:column;gap:1.25rem;}
+.bar-meta{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.4rem;}
+.bar-meta span:first-child{color:rgba(255,255,255,.7);}
+.bar-meta span:last-child{color:var(--lime);font-weight:600;font-family:var(--mono);}
+.track{background:rgba(255,255,255,.1);border-radius:99px;height:6px;overflow:hidden;}
+.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--lime),var(--gold));}
+.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2.5rem;text-align:center;}
+.big-ring{width:160px;height:160px;border-radius:50%;background:conic-gradient(var(--lime) 0% 72%,rgba(255,255,255,.07) 72%);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 0 0 8px rgba(168,213,88,.08),0 0 60px rgba(168,213,88,.2);}
+.big-ring-inner{width:118px;height:118px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.big-val{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--lime);line-height:1;}
+.big-max{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.1rem;}
+.credit-label{font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;}
+.credit-amount{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold);}
+.credit-formula{font-size:.78rem;color:rgba(255,255,255,.35);margin-top:.25rem;font-family:var(--mono);}
 
-    /* ── HOW IT WORKS ─────────── */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .step {
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.75rem 1.5rem;
-      border: 1px solid #E8F5E9;
-      position: relative;
-      transition: box-shadow .2s;
-    }
-    .step:hover { box-shadow: 0 8px 32px rgba(27,107,47,.1); }
-    .step-num {
-      width: 36px; height: 36px;
-      background: var(--green);
-      color: #fff;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800;
-      font-size: .9rem;
-      margin-bottom: 1rem;
-    }
-    .step-icon { font-size: 1.8rem; margin-bottom: .5rem; }
-    .step h4 { font-size: 1rem; margin-bottom: .4rem; color: var(--green-dark); }
-    .step p { font-size: .88rem; color: var(--text-light); }
+.api-section{background:var(--paper);}
+.ep-groups{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
+.ep-group h3{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(12,31,12,.35);margin-bottom:.75rem;}
+.ep{display:flex;align-items:center;gap:.65rem;padding:.6rem .85rem;border-radius:8px;background:#fff;border:1px solid var(--sand);margin-bottom:.45rem;font-family:var(--mono);font-size:.8rem;color:var(--ink);}
+.method{min-width:42px;text-align:center;padding:.18rem .4rem;border-radius:4px;font-size:.68rem;font-weight:700;}
+.GET{background:#EBF5FF;color:#1565C0;}
+.POST{background:#EFF8EC;color:var(--green);}
+.ep-desc{margin-left:auto;font-size:.72rem;color:rgba(12,31,12,.35);font-family:var(--sans);}
 
-    /* ── SCORE METER ─────────── */
-    .score-section { background: var(--green-dark); color: #fff; }
-    .score-section .section-title { color: #fff; }
-    .score-section .section-sub { color: rgba(255,255,255,.7); }
-    .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2.5rem; }
-    @media(max-width:680px){ .score-grid { grid-template-columns: 1fr; } }
-    .score-bar-list { display: flex; flex-direction: column; gap: 1.2rem; }
-    .score-item label { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: .4rem; }
-    .score-item label span { opacity: .7; }
-    .bar-track { background: rgba(255,255,255,.15); border-radius: 99px; height: 10px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #FFD54F, #FF8F00); }
-    .score-visual {
-      background: rgba(255,255,255,.08);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-    }
-    .score-circle {
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: conic-gradient(#FFD54F 0% 70%, rgba(255,255,255,.15) 70%);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 1rem;
-      box-shadow: 0 0 0 6px rgba(255,213,79,.15);
-    }
-    .score-circle-inner {
-      width: 100px; height: 100px;
-      background: var(--green-dark);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column;
-    }
-    .score-val { font-size: 2rem; font-weight: 800; color: #FFD54F; }
-    .score-max { font-size: .75rem; opacity: .6; }
-    .score-caption { font-size: .85rem; opacity: .7; }
+.stack-section{background:var(--sand);}
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.stack-card{background:var(--paper);border-radius:12px;padding:1.2rem;border:1px solid rgba(26,92,42,.08);display:flex;flex-direction:column;gap:.4rem;}
+.stack-card .si{font-size:1.4rem;}
+.stack-card .sn{font-weight:600;font-size:.88rem;color:var(--green);}
+.stack-card .sd{font-size:.76rem;color:rgba(12,31,12,.45);}
 
-    /* ── API ENDPOINTS ─────────── */
-    .endpoints { background: var(--grey); }
-    .endpoint-group { margin-top: 2rem; }
-    .endpoint-group h3 { font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: .75rem; }
-    .endpoint {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      padding: .75rem 1rem;
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: .5rem;
-      border: 1px solid #e5e5e5;
-      font-family: monospace;
-      font-size: .9rem;
-    }
-    .method {
-      padding: .2rem .55rem;
-      border-radius: 4px;
-      font-size: .75rem;
-      font-weight: 700;
-      min-width: 50px;
-      text-align: center;
-    }
-    .get  { background: #E3F2FD; color: var(--blue); }
-    .post { background: #E8F5E9; color: var(--green); }
-    .endpoint-desc { margin-left: auto; font-size: .8rem; color: var(--text-light); font-family: sans-serif; }
+.partners-section{background:var(--paper);}
+.chips{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem;}
+.chip{background:var(--mist);border:1px solid rgba(26,92,42,.12);border-radius:99px;padding:.45rem 1.1rem;font-size:.85rem;font-weight:500;color:var(--green);}
 
-    /* ── STACK ─────────────────── */
-    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .stack-card {
-      background: #fff;
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      padding: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      font-size: .9rem;
-      font-weight: 600;
-    }
-    .stack-icon { font-size: 1.5rem; }
+.cta-section{background:var(--ink);padding:8rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(26,92,42,.6) 0%,transparent 70%);}
+.cta-section .tag{color:var(--lime);position:relative;z-index:2;}
+.cta-section h2{color:#fff;position:relative;z-index:2;max-width:600px;margin:0 auto 1rem;}
+.cta-section .section-sub{color:rgba(255,255,255,.55);margin:0 auto 3rem;position:relative;z-index:2;}
+.code-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem 2rem;text-align:left;max-width:520px;margin:0 auto 2.5rem;position:relative;z-index:2;}
+.code-block div{font-family:var(--mono);font-size:.85rem;line-height:2;color:rgba(168,213,88,.8);}
+.code-block .cm{color:rgba(255,255,255,.2);}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
 
-    /* ── PARTNERS ─────────────── */
-    .partners { background: var(--gold-light); }
-    .partner-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; justify-content: center; }
-    .partner-chip {
-      background: #fff;
-      border: 1px solid rgba(200, 135, 26, .3);
-      border-radius: 8px;
-      padding: .65rem 1.25rem;
-      font-weight: 600;
-      color: var(--green-dark);
-      font-size: .9rem;
-    }
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2rem 4rem;text-align:center;font-size:.82rem;color:rgba(255,255,255,.3);}
+footer a{color:rgba(255,255,255,.5);text-decoration:none;}
+footer a:hover{color:rgba(255,255,255,.9);}
 
-    /* ── CTA FINAL ─────────────── */
-    .cta-section { background: var(--green); color: #fff; text-align: center; }
-    .cta-section .section-title { color: #fff; }
-    .cta-section p { color: rgba(255,255,255,.85); margin-bottom: 2rem; }
-    .cta-code {
-      background: rgba(0,0,0,.25);
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      font-family: monospace;
-      font-size: .9rem;
-      text-align: left;
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-      line-height: 2;
-      color: #A5D6A7;
-    }
-    .cta-code .cmd { color: #fff; }
-    .cta-code .comment { color: rgba(255,255,255,.4); }
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:none;}
 
-    /* ── FOOTER ─────────────────── */
-    footer {
-      background: var(--green-dark);
-      color: rgba(255,255,255,.6);
-      text-align: center;
-      padding: 2rem;
-      font-size: .85rem;
-    }
-    footer a { color: rgba(255,255,255,.8); text-decoration: none; }
-    footer a:hover { color: #fff; }
-  </style>
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{min-height:50vh;padding:3rem;}
+  .hero-left{padding:3rem 2rem;}
+  section{padding:4rem 2rem;}
+  .ps-grid,.steps-grid,.score-layout,.ep-groups,.stack-grid{grid-template-columns:1fr;}
+  nav{padding:1rem 1.5rem;}
+  .nav-r a:not(.nav-cta){display:none;}
+  .step-line{display:none;}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">🌾 TONTINE+</a>
-  <div class="nav-links">
-    <a href="#comment">Comment ça marche</a>
+  <a class="logo" href="#">TONTINE<sup>+</sup></a>
+  <div class="nav-r">
+    <a href="#comment">Fonctionnement</a>
     <a href="#api">API</a>
     <a href="#stack">Stack</a>
     <a href="https://github.com/doundou969/agri-tontine-diourbel" target="_blank" class="nav-cta">GitHub →</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">🏆 Candidature AYuTe Africa Challenge 2026</div>
-  <h1>La tontine de village<br>devient une <span>banque numérique</span></h1>
-  <p>Digitalisez vos tontines agricoles pour financer semences et engrais — sans banque, sans garantie, avec Wave.</p>
-  <div class="hero-btns">
-    <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-primary" target="_blank">
-      ⬇ Cloner sur GitHub
-    </a>
-    <a href="#comment" class="btn btn-outline">Voir comment ça marche</a>
+  <div class="hero-left">
+    <div class="pill">🏆 Candidature AYuTe Africa Challenge 2026</div>
+    <h1>La tontine de village devient une <em>banque numérique</em></h1>
+    <p class="hero-sub">Digitalisez vos tontines agricoles pour financer semences et engrais — sans banque, sans garantie, avec Wave. Scoring IA automatique à chaque cotisation.</p>
+    <div class="hero-btns">
+      <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-solid" target="_blank">⬇ Cloner sur GitHub</a>
+      <a href="#comment" class="btn btn-ghost">Comment ça marche</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-val">50k</div><div class="stat-lbl">Paysans cibles · Diourbel</div></div>
+      <div class="stat-item"><div class="stat-val">1,5%</div><div class="stat-lbl">Commission Wave</div></div>
+      <div class="stat-item"><div class="stat-val">15M F</div><div class="stat-lbl">Subvention AYuTe max</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="mockup">
+      <div class="mockup-header">
+        <div class="avatar">👨‍🌾</div>
+        <div><p>Baye Sène</p><p>Touba Toul · Diourbel</p></div>
+      </div>
+      <div class="score-ring">
+        <div class="ring"><div class="ring-inner"><div class="ring-val">72</div><div class="ring-max">/ 100</div></div></div>
+        <div class="ring-label">Score de crédit</div>
+      </div>
+      <div class="mockup-rows">
+        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">🌱</span><span>Tontine Baye Sène</span></div><span class="mock-chip chip-g">actif</span></div>
+        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">💸</span><span>Cotisation semaine 8</span></div><span class="mock-chip chip-g">payée</span></div>
+        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">🏦</span><span>Crédit intrants DER</span></div><span class="mock-chip chip-y">72 000 F</span></div>
+        <div class="mock-row"><div class="mock-row-l"><span class="mock-icon">⚠️</span><span>Tour précédent</span></div><span class="mock-chip chip-r">retard ×1</span></div>
+      </div>
+      <button class="wave-btn">💳 Payer via Wave</button>
+    </div>
   </div>
 </div>
 
-<!-- STATS -->
-<div class="container">
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-val">50 000</div>
-      <div class="stat-label">Paysans cibles · Diourbel</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">1,5%</div>
-      <div class="stat-label">Commission/transaction Wave</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">15M F</div>
-      <div class="stat-label">Subvention AYuTe max</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">4 sem.</div>
-      <div class="stat-label">MVP opérationnel</div>
-    </div>
-  </div>
-</div>
-
-<!-- PROBLÈME / SOLUTION -->
-<section>
+<section class="ps" id="pourquoi">
   <div class="container">
-    <div class="section-tag">Pourquoi TONTINE+</div>
-    <h2 class="section-title">Le crédit agricole bloque les rendements</h2>
-    <p class="section-sub">70% des paysans sénégalais n'accèdent pas au crédit formel. Les tontines informelles existent partout — mais elles sont opaques, risquées et sans levier financier.</p>
+    <div class="tag fade-in">Pourquoi TONTINE+</div>
+    <h2 class="fade-in">Le crédit agricole bloque les rendements</h2>
+    <p class="section-sub fade-in">70% des paysans sénégalais n'accèdent pas au crédit formel. Les tontines informelles existent partout — mais opaques, risquées, sans levier financier.</p>
     <div class="ps-grid">
-      <div class="ps-card problem-card">
+      <div class="ps-card prob fade-in">
         <h3>❌ Tontine traditionnelle</h3>
         <ul>
           <li>Aucune traçabilité des cotisations</li>
@@ -370,16 +238,16 @@
           <li>Pas de scoring → accès aléatoire</li>
           <li>Zéro accès au crédit externe</li>
           <li>Réunions physiques obligatoires</li>
-          <li>-40% rendement faute d'intrants</li>
+          <li>−40% rendement faute d'intrants</li>
         </ul>
       </div>
-      <div class="ps-card solution-card solution">
+      <div class="ps-card sol fade-in">
         <h3>✅ TONTINE+</h3>
         <ul>
-          <li>Chaque cotisation enregistrée en DB</li>
+          <li>Chaque cotisation enregistrée en base</li>
           <li>Transparence totale pour tous les membres</li>
           <li>Scoring IA → microcrédits mérités</li>
-          <li>Partenariats DER / FADA / PAM CAS</li>
+          <li>Partenariats DER · FADA · PAM CAS</li>
           <li>Paiement Wave depuis n'importe où</li>
           <li>+30% rendements avec intrants financés</li>
         </ul>
@@ -388,194 +256,141 @@
   </div>
 </section>
 
-<!-- COMMENT ÇA MARCHE -->
-<section id="comment" style="background:var(--grey);">
+<section class="steps-section" id="comment">
   <div class="container">
-    <div class="section-tag">Fonctionnement</div>
-    <h2 class="section-title">En 4 étapes simples</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-icon">📱</div>
-        <h4>S'inscrire</h4>
-        <p>Le paysan s'inscrit avec son numéro Wave (+221). Compte créé en 30 secondes.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-icon">🤝</div>
-        <h4>Rejoindre une tontine</h4>
-        <p>Créer ou rejoindre un groupe du village. L'admin fixe le montant et la fréquence.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-icon">💸</div>
-        <h4>Cotiser via Wave</h4>
-        <p>Chaque paiement est enregistré et visible par tous. Le score IA monte automatiquement.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-icon">🌱</div>
-        <h4>Obtenir un microcrédit</h4>
-        <p>Score ≥ 40/100 → accès crédit intrants (semences, engrais) via DER ou FADA.</p>
-      </div>
+    <div class="tag fade-in">Fonctionnement</div>
+    <h2 class="fade-in">En 4 étapes simples</h2>
+    <div class="steps-grid">
+      <div class="step-card fade-in"><div class="step-num">01 —</div><div class="step-icon-wrap">📱</div><h4>S'inscrire</h4><p>Numéro Wave +221. Compte créé en 30 secondes. Zéro document.</p><div class="step-line"></div></div>
+      <div class="step-card fade-in"><div class="step-num">02 —</div><div class="step-icon-wrap">🤝</div><h4>Rejoindre</h4><p>Créer ou rejoindre une tontine du village. L'admin fixe montant et fréquence.</p><div class="step-line"></div></div>
+      <div class="step-card fade-in"><div class="step-num">03 —</div><div class="step-icon-wrap">💸</div><h4>Cotiser via Wave</h4><p>Chaque paiement tracé. Score IA recalculé automatiquement.</p><div class="step-line"></div></div>
+      <div class="step-card fade-in"><div class="step-num">04 —</div><div class="step-icon-wrap">🌱</div><h4>Obtenir un crédit</h4><p>Score ≥ 40 → microcrédits semences et engrais via DER ou FADA.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SCORE IA -->
 <section class="score-section">
   <div class="container">
-    <div class="section-tag" style="color:#FFD54F;">Scoring IA</div>
-    <h2 class="section-title">Un score de crédit juste et transparent</h2>
-    <p class="section-sub">Calculé automatiquement après chaque cotisation. Aucune banque ne décide — l'algorithme oui.</p>
-    <div class="score-grid">
-      <div class="score-bar-list">
-        <div class="score-item">
-          <label>Taux de paiement des cotisations <span>60%</span></label>
-          <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
-        </div>
-        <div class="score-item">
-          <label>Participation multi-tontines <span>15%</span></label>
-          <div class="bar-track"><div class="bar-fill" style="width:15%"></div></div>
-        </div>
-        <div class="score-item">
-          <label>Volume & ancienneté <span>10%</span></label>
-          <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
-        </div>
-        <div class="score-item">
-          <label>Crédits remboursés (bonus) <span>10%</span></label>
-          <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
-        </div>
-        <div class="score-item">
-          <label>Malus retards <span style="color:#FF5252;">-5 pts/retard</span></label>
-          <div class="bar-track"><div class="bar-fill" style="width:5%;background:linear-gradient(90deg,#FF5252,#B71C1C)"></div></div>
-        </div>
+    <div class="tag fade-in">Scoring IA</div>
+    <h2 class="fade-in">Un score de crédit juste et transparent</h2>
+    <p class="section-sub fade-in">Calculé automatiquement après chaque cotisation. Aucune banque ne décide — l'algorithme oui.</p>
+    <div class="score-layout">
+      <div class="bars fade-in">
+        <div class="bar-item"><div class="bar-meta"><span>Taux de paiement des cotisations</span><span>60 pts</span></div><div class="track"><div class="fill" style="width:60%"></div></div></div>
+        <div class="bar-item"><div class="bar-meta"><span>Participation multi-tontines</span><span>15 pts</span></div><div class="track"><div class="fill" style="width:15%"></div></div></div>
+        <div class="bar-item"><div class="bar-meta"><span>Volume & ancienneté</span><span>10 pts</span></div><div class="track"><div class="fill" style="width:10%"></div></div></div>
+        <div class="bar-item"><div class="bar-meta"><span>Crédits remboursés (bonus)</span><span>10 pts</span></div><div class="track"><div class="fill" style="width:10%"></div></div></div>
+        <div class="bar-item"><div class="bar-meta"><span>Malus par retard</span><span style="color:#FF7F6A;">−5 pts</span></div><div class="track"><div class="fill" style="width:5%;background:linear-gradient(90deg,#FF7F6A,#C94F2C)"></div></div></div>
       </div>
-      <div class="score-visual">
-        <div class="score-circle">
-          <div class="score-circle-inner">
-            <div class="score-val">70</div>
-            <div class="score-max">/ 100</div>
-          </div>
-        </div>
-        <p style="font-size:1.1rem;font-weight:700;margin-bottom:.3rem;">Plafond crédit</p>
-        <p style="font-size:1.8rem;font-weight:800;color:#FFD54F;">70 000 FCFA</p>
-        <p class="score-caption">score × 1 000 FCFA = montant max éligible</p>
+      <div class="score-card fade-in">
+        <div class="big-ring"><div class="big-ring-inner"><div class="big-val">72</div><div class="big-max">/ 100</div></div></div>
+        <div class="credit-label">Plafond crédit débloqué</div>
+        <div class="credit-amount">72 000 FCFA</div>
+        <div class="credit-formula">score × 1 000 FCFA = montant max</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- API ENDPOINTS -->
-<section id="api">
+<section class="api-section" id="api">
   <div class="container">
-    <div class="section-tag">API REST Flask</div>
-    <h2 class="section-title">13 endpoints, tout en JSON</h2>
-    <p class="section-sub">Auth JWT · SQLite (dev) → PostgreSQL (prod) · Mode sandbox Wave inclus.</p>
-
-    <div class="endpoint-group">
-      <h3>🔐 Authentification</h3>
-      <div class="endpoint"><span class="method post">POST</span>/api/auth/register<span class="endpoint-desc">Inscription +221XXXXXXXXX</span></div>
-      <div class="endpoint"><span class="method post">POST</span>/api/auth/login<span class="endpoint-desc">Token JWT 24h</span></div>
-      <div class="endpoint"><span class="method get">GET</span>/api/auth/me<span class="endpoint-desc">Profil + score</span></div>
-    </div>
-
-    <div class="endpoint-group">
-      <h3>🤝 Tontines</h3>
-      <div class="endpoint"><span class="method get">GET</span>/api/tontines<span class="endpoint-desc">Lister les tontines actives</span></div>
-      <div class="endpoint"><span class="method post">POST</span>/api/tontines<span class="endpoint-desc">Créer une tontine</span></div>
-      <div class="endpoint"><span class="method get">GET</span>/api/tontines/&lt;id&gt;<span class="endpoint-desc">Détail + membres</span></div>
-      <div class="endpoint"><span class="method post">POST</span>/api/tontines/&lt;id&gt;/rejoindre<span class="endpoint-desc">Rejoindre</span></div>
-    </div>
-
-    <div class="endpoint-group">
-      <h3>💸 Cotisations</h3>
-      <div class="endpoint"><span class="method post">POST</span>/api/cotisations/payer<span class="endpoint-desc">Payer via Wave + scoring auto</span></div>
-      <div class="endpoint"><span class="method get">GET</span>/api/cotisations/historique/&lt;id&gt;<span class="endpoint-desc">Historique</span></div>
-      <div class="endpoint"><span class="method get">GET</span>/api/cotisations/retards/&lt;id&gt;<span class="endpoint-desc">Membres en retard</span></div>
-    </div>
-
-    <div class="endpoint-group">
-      <h3>🌱 Crédits Intrants</h3>
-      <div class="endpoint"><span class="method post">POST</span>/api/credits/demander<span class="endpoint-desc">Demande microcrédit (scorée en temps réel)</span></div>
-      <div class="endpoint"><span class="method get">GET</span>/api/credits/mes-credits<span class="endpoint-desc">Mes demandes</span></div>
-      <div class="endpoint"><span class="method post">POST</span>/api/credits/&lt;id&gt;/rembourser<span class="endpoint-desc">Rembourser → bonus score</span></div>
+    <div class="tag fade-in">API REST Flask</div>
+    <h2 class="fade-in">13 endpoints, tout en JSON</h2>
+    <p class="section-sub fade-in">Auth JWT · SQLite dev → PostgreSQL prod · Mode sandbox Wave inclus.</p>
+    <div class="ep-groups">
+      <div>
+        <div class="ep-group fade-in"><h3>🔐 Authentification</h3>
+          <div class="ep"><span class="method POST">POST</span>/api/auth/register<span class="ep-desc">Inscription +221</span></div>
+          <div class="ep"><span class="method POST">POST</span>/api/auth/login<span class="ep-desc">Token JWT 24h</span></div>
+          <div class="ep"><span class="method GET">GET</span>/api/auth/me<span class="ep-desc">Profil + score</span></div>
+        </div>
+        <div class="ep-group fade-in" style="margin-top:1.5rem"><h3>💸 Cotisations</h3>
+          <div class="ep"><span class="method POST">POST</span>/api/cotisations/payer<span class="ep-desc">Wave + scoring auto</span></div>
+          <div class="ep"><span class="method GET">GET</span>/api/cotisations/historique/&lt;id&gt;</div>
+          <div class="ep"><span class="method GET">GET</span>/api/cotisations/retards/&lt;id&gt;</div>
+        </div>
+      </div>
+      <div>
+        <div class="ep-group fade-in"><h3>🤝 Tontines</h3>
+          <div class="ep"><span class="method GET">GET</span>/api/tontines</div>
+          <div class="ep"><span class="method POST">POST</span>/api/tontines</div>
+          <div class="ep"><span class="method GET">GET</span>/api/tontines/&lt;id&gt;</div>
+          <div class="ep"><span class="method POST">POST</span>/api/tontines/&lt;id&gt;/rejoindre</div>
+        </div>
+        <div class="ep-group fade-in" style="margin-top:1.5rem"><h3>🌱 Crédits Intrants</h3>
+          <div class="ep"><span class="method POST">POST</span>/api/credits/demander<span class="ep-desc">Scoré en temps réel</span></div>
+          <div class="ep"><span class="method GET">GET</span>/api/credits/mes-credits</div>
+          <div class="ep"><span class="method POST">POST</span>/api/credits/&lt;id&gt;/rembourser</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STACK -->
-<section id="stack" style="background:var(--grey);">
+<section class="stack-section" id="stack">
   <div class="container">
-    <div class="section-tag">Technologies</div>
-    <h2 class="section-title">Stack léger, déployable en 5 minutes</h2>
+    <div class="tag fade-in">Technologies</div>
+    <h2 class="fade-in">Stack léger, déployable en 5 minutes</h2>
     <div class="stack-grid">
-      <div class="stack-card"><span class="stack-icon">🐍</span>Python 3.11 + Flask 3</div>
-      <div class="stack-card"><span class="stack-icon">🗄</span>SQLAlchemy + SQLite</div>
-      <div class="stack-card"><span class="stack-icon">🔐</span>JWT (flask-jwt-extended)</div>
-      <div class="stack-card"><span class="stack-icon">💳</span>Wave API (sandbox)</div>
-      <div class="stack-card"><span class="stack-icon">📱</span>Africa's Talking (SMS)</div>
-      <div class="stack-card"><span class="stack-icon">🤖</span>Scoring IA (scikit-learn)</div>
-      <div class="stack-card"><span class="stack-icon">⚙️</span>GitHub Actions CI</div>
-      <div class="stack-card"><span class="stack-icon">🚀</span>Replit / Render / Railway</div>
+      <div class="stack-card fade-in"><div class="si">🐍</div><div class="sn">Python 3.11 + Flask 3</div><div class="sd">Backend API REST</div></div>
+      <div class="stack-card fade-in"><div class="si">🗄</div><div class="sn">SQLAlchemy + SQLite</div><div class="sd">ORM + DB zéro config</div></div>
+      <div class="stack-card fade-in"><div class="si">🔐</div><div class="sn">JWT Extended</div><div class="sd">Auth stateless mobile</div></div>
+      <div class="stack-card fade-in"><div class="si">💳</div><div class="sn">Wave API sandbox</div><div class="sd">Mobile money Sénégal</div></div>
+      <div class="stack-card fade-in"><div class="si">📱</div><div class="sn">Africa's Talking</div><div class="sd">SMS USSD hors-ligne</div></div>
+      <div class="stack-card fade-in"><div class="si">🤖</div><div class="sn">Scoring IA</div><div class="sd">Formule pondérée → ML v2</div></div>
+      <div class="stack-card fade-in"><div class="si">⚙️</div><div class="sn">GitHub Actions CI</div><div class="sd">pytest + flake8 auto</div></div>
+      <div class="stack-card fade-in"><div class="si">🚀</div><div class="sn">Replit / Render</div><div class="sd">Déploiement immédiat</div></div>
     </div>
   </div>
 </section>
 
-<!-- PARTENAIRES -->
-<section class="partners">
+<section class="partners-section">
   <div class="container">
-    <div class="section-tag">Écosystème</div>
-    <h2 class="section-title">Partenaires & financeurs cibles</h2>
-    <div class="partner-grid">
-      <div class="partner-chip">🏆 AYuTe Africa Challenge</div>
-      <div class="partner-chip">🌱 VITAGRO / NOVAGRI 2026</div>
-      <div class="partner-chip">🏦 DER Sénégal</div>
-      <div class="partner-chip">🤝 FADA</div>
-      <div class="partner-chip">🌍 PAM CAS</div>
-      <div class="partner-chip">🥜 SONACOS Diourbel</div>
-      <div class="partner-chip">🏭 Agropole Diourbel</div>
-      <div class="partner-chip">💸 Wave Sénégal</div>
+    <div class="tag fade-in">Écosystème</div>
+    <h2 class="fade-in">Partenaires & financeurs cibles</h2>
+    <div class="chips">
+      <div class="chip fade-in">🏆 AYuTe Africa Challenge</div>
+      <div class="chip fade-in">🌱 VITAGRO / NOVAGRI 2026</div>
+      <div class="chip fade-in">🏦 DER Sénégal</div>
+      <div class="chip fade-in">🤝 FADA</div>
+      <div class="chip fade-in">🌍 PAM CAS</div>
+      <div class="chip fade-in">🥜 SONACOS Diourbel</div>
+      <div class="chip fade-in">🏭 Agropole Diourbel</div>
+      <div class="chip fade-in">💸 Wave Sénégal</div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
 <section class="cta-section">
-  <div class="container">
-    <div class="section-tag" style="color:#FFD54F;">Open Source · MIT</div>
-    <h2 class="section-title">Prêt à démarrer en 3 commandes</h2>
-    <p>Zéro configuration complexe. Fonctionne sur Replit en 5 minutes.</p>
-    <div class="cta-code">
-      <div><span class="comment"># 1. Cloner</span></div>
-      <div><span class="cmd">git clone https://github.com/doundou969/agri-tontine-diourbel.git</span></div>
-      <div><span class="comment"># 2. Installer</span></div>
-      <div><span class="cmd">pip install -r requirements.txt</span></div>
-      <div><span class="comment"># 3. Lancer</span></div>
-      <div><span class="cmd">python run.py</span></div>
-    </div>
-    <div class="hero-btns">
-      <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-primary" target="_blank">
-        ⭐ Voir sur GitHub
-      </a>
-      <a href="https://github.com/doundou969/agri-tontine-diourbel/archive/refs/heads/main.zip" class="btn btn-outline">
-        ⬇ Télécharger le ZIP
-      </a>
-    </div>
+  <div class="tag">Open Source · MIT</div>
+  <h2>Prêt à démarrer en 3 commandes</h2>
+  <p class="section-sub">Zéro configuration complexe. Fonctionne sur Replit en 5 minutes.</p>
+  <div class="code-block">
+    <div class="cm"># 1. Cloner</div>
+    <div>git clone https://github.com/doundou969/agri-tontine-diourbel.git</div>
+    <div class="cm"># 2. Installer</div>
+    <div>pip install -r requirements.txt</div>
+    <div class="cm"># 3. Lancer</div>
+    <div>python run.py</div>
+  </div>
+  <div class="cta-btns">
+    <a href="https://github.com/doundou969/agri-tontine-diourbel" class="btn btn-solid" target="_blank">⭐ Voir sur GitHub</a>
+    <a href="https://github.com/doundou969/agri-tontine-diourbel/archive/refs/heads/main.zip" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);" target="_blank">⬇ Télécharger ZIP</a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>
-    🌾 <strong>TONTINE+</strong> — Fintech Tontine Agricole · Diourbel, Sénégal<br>
-    <a href="https://github.com/doundou969/agri-tontine-diourbel" target="_blank">github.com/doundou969/agri-tontine-diourbel</a>
-    &nbsp;·&nbsp;
-    <a href="https://doundou969.github.io" target="_blank">doundou969.github.io</a>
-    &nbsp;·&nbsp; MIT Licence
-  </p>
-  <p style="margin-top:.5rem;opacity:.5;">Candidature AYuTe Africa Challenge 2026 · VITAGRO/NOVAGRI · Agropole Diourbel</p>
+  <p>🌾 <strong style="color:rgba(255,255,255,.6)">TONTINE+</strong> · Fintech Agricole · Diourbel, Sénégal &nbsp;·&nbsp;
+  <a href="https://github.com/doundou969/agri-tontine-diourbel" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  <a href="https://doundou969.github.io/agri-tontine-diourbel/" target="_blank">doundou969.github.io</a> &nbsp;·&nbsp; MIT</p>
+  <p style="margin-top:.4rem;opacity:.5;">Candidature AYuTe Africa Challenge 2026 · VITAGRO/NOVAGRI · Agropole Diourbel</p>
 </footer>
 
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
