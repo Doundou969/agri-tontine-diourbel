@@ -1,6 +1,4 @@
-from app.models.user import User
-from app.models.tontine import Tontine, Membre
-from app.models.cotisation import Cotisation
-from app.models.credit import Credit
+from app.services.wave_payment import initier_paiement_wave
+from app.services.ai_scoring import recalculer_score, est_eligible_credit
 
-__all__ = ["User", "Tontine", "Membre", "Cotisation", "Credit"]
+__all__ = ["initier_paiement_wave", "recalculer_score", "est_eligible_credit"]
