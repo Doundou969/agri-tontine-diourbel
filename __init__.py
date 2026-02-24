@@ -1,4 +1,6 @@
-from app.services.wave_payment import initier_paiement_wave
-from app.services.ai_scoring import recalculer_score, est_eligible_credit
+from app.routes.auth import auth_bp
+from app.routes.tontines import tontines_bp
+from app.routes.cotisations import cotisations_bp
+from app.routes.credits import credits_bp
 
-__all__ = ["initier_paiement_wave", "recalculer_score", "est_eligible_credit"]
+__all__ = ["auth_bp", "tontines_bp", "cotisations_bp", "credits_bp"]
